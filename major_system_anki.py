@@ -10,18 +10,13 @@ def read_csv_and_add_to_deck(csv_filename, deck, model):
             word = row['Word']
             phonetic = row['Phonetic Breakdown']
 
-            try:
-                # Convert number to integer for proper ordering in Anki deck
-                number_int = int(number)
-            except ValueError:
-                print(f"Skipping invalid number: {number}")
-                continue
-
             # Create a note with the fields
             note = genanki.Note(
                 model=model,
-                fields=[str(number_int), word, phonetic]
+                fields=[number, word, phonetic]
             )
+
+            print([number, word, phonetic])
 
             # Add the note to the deck
             deck.add_note(note)
